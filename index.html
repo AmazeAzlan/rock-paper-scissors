@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="style1.css">
+  </head>
+  <body>
+    <div class="game-area">
+      <h2>Rock Paper Scissors</h2>
+
+      <div class="moves-area">
+        <button class="move-button"
+          onclick="
+          playGame('rock');
+        "
+        >
+          <img class="move-icon" src="./images/rock-emoji.png" alt="rock">
+        </button>
+        <button class="move-button"
+          onclick="
+          playGame('paper');
+        "
+        >
+          <img class="move-icon" src="./images/paper-emoji.png" alt="paper">
+        </button>
+        <button class="move-button"
+          onclick="
+          playGame('scissors');
+        "
+        >
+          <img class="move-icon" src="./images/scissors-emoji.png" alt="scissors">
+        </button>
+      </div>
+
+      <p class="js-result result-txt"></p>
+      <p class="js-moves moves-txt"></p>
+      <p class="js-score score-txt"></p>
+
+      <button class="reset-button"
+        onclick="
+        score.wins = 0;
+        score.losses = 0;
+        score.ties = 0;
+        localStorage.removeItem('score');
+        updateScoreElement();
+      "
+      >
+        Reset Score
+      </button>
+    </div>
+    
+
+    <footer>
+      <div>
+        Made with <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="yellow" style="height: 20px; transform: translateY(4px)"><path d="M16.5 3C19.5376 3 22 5.5 22 9C22 16 14.5 20 12 21.5C9.5 20 2 16 2 9C2 5.5 4.5 3 7.5 3C9.35997 3 11 4 12 5C13 4 14.64 3 16.5 3Z"></path></svg> by Aslam Patel
+      </div>
+    </footer>
+
+    <script src="rock-paper-scissors.js"></script>
+  </body>
+</html>
