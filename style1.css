@@ -38,6 +38,7 @@ h2 {
   height: 120px;
   margin-right: 20px;
   margin-bottom: 30px;
+  cursor: pointer;
 }
 
 .result-txt {
@@ -47,7 +48,7 @@ h2 {
 
 .moves-txt {
   font-size: 1.2rem;
-  margin-block: 20px 60px;
+  margin-block: 20px 40px;
 }
 
 .score-txt {
@@ -55,11 +56,15 @@ h2 {
   margin-block: 20px;
 }
 
-.reset-button {
+.reset-button,
+.auto-play-button,
+.reset-confirm-button {
   background-color: white;
   padding: 10px 15px;
   border: none;
   font-size: 1rem;
+  margin: 10px;
+  cursor: pointer;
 }
 
 footer {
@@ -73,4 +78,3 @@ footer {
   align-items: center;
   justify-content: center;
 }
-
