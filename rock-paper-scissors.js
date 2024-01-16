@@ -16,6 +16,56 @@ if (!score) {
 }
 */
 
+let isAutoPlaying = false;
+let intervalId;
+
+function autoPlay() {
+  if (!isAutoPlaying) {
+    intervalId = setInterval(() => {
+      const playerMove = pickComputerMove();
+      playGame(playerMove);
+    }, 1000)
+    document.querySelector('.js-auto-play-button') 
+      .innerHTML = 'Stop Playing';
+    isAutoPlaying = true;
+  } else {
+    clearInterval(intervalId);
+    document.querySelector('.js-auto-play-button')
+      .innerHTML = 'Auto Play';
+    isAutoPlaying = false;
+  }
+}
+
+document.querySelector('.js-rock-button')
+  .addEventListener('click', () => {
+    playGame('rock');
+  });
+
+document.querySelector('.js-paper-button')
+  .addEventListener('click', () => {
+    playGame('paper');
+  });
+
+document.querySelector('.js-scissors-button')
+  .addEventListener('click', () => {
+    playGame('scissors')
+  })
+
+document.body.addEventListener('keydown', (event) => {
+  if (event.key === 'r') {
+    playGame('rock');
+  } else if (event.key === 'p') {
+    playGame('paper');
+  } else if (event.key === 's') {
+    playGame('scissors');
+  } else if (event.key === 'a') {
+    autoPlay();
+  } else if (event.key === 'Backspace') {
+    showResetConfirmation();
+  }
+});
+
+
 // function for comparing playermove with computer move
 function playGame(playerMove) {
   const computerMove = pickComputerMove();
@@ -64,11 +114,58 @@ function playGame(playerMove) {
 
   document.querySelector('.js-moves').
     innerHTML = `You 
-          <img src="./images/${playerMove}-emoji.png" alt="${playerMove}" class="move-icon">
-          <img src="./images/${computerMove}-emoji.png" alt="${computerMove}" class="move-icon">
-          Computer `;
-
+      <img src="./images/${playerMove}-emoji.png" alt="${playerMove}" class="move-icon">
+      <img src="./images/${computerMove}-emoji.png" alt="${computerMove}" class="move-icon">
+      Computer `;
 }
+
+document.querySelector('.js-reset-button')
+  .addEventListener('click', () => {
+    showResetConfirmation();
+  });
+
+function showResetConfirmation() {
+  document.querySelector('.js-reset-confirmation')
+    .innerHTML = `
+      Are you sure you want to reset the score?
+      <button class= "js-reset-confirm-yes reset-confirm-button">
+        Yes
+      </button>
+      <button class= "js-reset-confirm-no reset-confirm-button">
+        No
+      </button>
+    `;
+
+    document.querySelector('.js-reset-confirm-yes')
+      .addEventListener('click', () => {
+        resetScore();
+        hideResetConfirmation();
+      });
+    
+    document.querySelector('.js-reset-confirm-no')
+      .addEventListener('click', () => {
+        hideResetConfirmation();
+      })
+}
+
+function hideResetConfirmation() {
+  document.querySelector('.js-reset-confirmation')
+    .innerHTML = '';
+}
+
+function resetScore() {
+  score.wins = 0;
+  score.losses = 0;
+  score.ties = 0;
+  localStorage.removeItem('score');
+  updateScoreElement();
+}
+resetScore();
+
+document.querySelector('.js-auto-play-button')
+  .addEventListener('click', () => {
+    autoPlay();
+  });
 
 function updateScoreElement() {
   document.querySelector(
